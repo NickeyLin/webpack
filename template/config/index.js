@@ -3,7 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-var target = process.env.TARGET;
+var target = process.env.TARGET || "";
 
 module.exports = {
   dev: {

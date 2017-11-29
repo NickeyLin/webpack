@@ -9,11 +9,6 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 var chalk = require('chalk')
 
-// add hot-reload related code to entry chunks
-Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
-})
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -91,11 +86,11 @@ module.exports = new Promise((resolve, reject) => {
           chunksSortMode: 'dependency'
         };
       
-        if (pathname in module.exports.entry) {
+        if (pathname in devWebpackConfig.entry) {
           conf.chunks = ['manifest', 'vendor', pathname];
           conf.hash = true;
         }
-        module.exports.plugins.push(new HtmlWebpackPlugin(conf));
+        devWebpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
       }
 
       resolve(devWebpackConfig)

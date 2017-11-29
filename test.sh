@@ -1,9 +1,9 @@
 set -e
 
-yes "" | ./node_modules/.bin/vue init . test
+vue init . test
 
 cd test
-npm install
+npm install --registry=https://registry.npm.taobao.org
 npm run lint
 npm test
 npm run build

@@ -60,20 +60,15 @@ module.exports = {
                     short: "Standard"
                 },
                 {
-                    name: "Airbnb (https://github.com/airbnb/javascript)",
-                    value: "airbnb",
-                    short: "Airbnb"
-                },
-                {
                     name: "none (configure it yourself)",
                     value: "none",
                     short: "none"
                 }
             ]
         },
-        sass: {
+        fastclick: {
             type: "confirm",
-            message: "Use SASS?"
+            message: "Require fastclick?"
         },
         unit: {
             type: "confirm",

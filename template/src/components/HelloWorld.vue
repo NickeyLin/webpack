@@ -42,13 +42,13 @@
 </template>
 
 <script>
-import { Alert } from 'vux';
+import { Alert } from "vux";
 
 export default {
-    name: 'HelloWorld',
+    name: "HelloWorld",
     data() {
         return {
-            msg: 'Welcome to Your Vue.js App',
+            msg: "Welcome to Your Vue.js App",
             showAlert: false
         };
     },

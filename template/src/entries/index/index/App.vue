@@ -11,11 +11,11 @@
 
 <script>
 {{#unless router}}
-import HelloWorld from '@/components/HelloWorld';
+import HelloWorld from "@/components/HelloWorld";
 
 {{/unless}}
 export default {
-    name: 'app'{{#router}}{{else}},
+    name: "app"{{#router}}{{else}},
     components: {
         HelloWorld
     }{{/router}}
@@ -24,7 +24,7 @@ export default {
 
 <style>
 #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;

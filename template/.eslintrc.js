@@ -24,10 +24,8 @@ module.exports = {
         "indent": ["error", 4, { SwitchCase: 1 }],
         // requires semicolons at the end of statements
         "semi": ["error", "always"],
-        // turn off quotes eslint
-        "quotes" : 0,
-        // can use '===' or '=='
-        "eqeqeq": 0,
+        // use double quotes 
+        "quotes" : ["error", "double"],
         "space-before-function-paren": ["error", {
             "anonymous": "always",
             "named": "never",

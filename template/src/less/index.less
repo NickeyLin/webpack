@@ -1,0 +1,165 @@
+@import "./mixin";
+body,
+html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    background-color: rgb(230, 236, 240);
+}
+*,
+body,
+html {
+    font-family: @fontFamily;
+    font-size: 0.16rem;
+}
+/*匹配各个尺寸的屏幕*/
+html {
+    font-size: 625%;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+    height: 100%;
+}
+@media only screen and (max-width: 375px) {
+    html {
+        font-size: 625%;
+    }
+}
+@media only screen and (max-width: 360px) {
+    html {
+        font-size: 600%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    html {
+        font-size: 533%;
+    }
+}
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a {
+    text-decoration: none;
+    &:hover,
+    &:link,
+    &:active,
+    & * {
+        outline: none;
+        -webkit-appearance: none;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+        background: transparent;
+    }
+}
+ul,
+li {
+    list-style-type: none;
+}
+div,
+span,
+a,
+p,
+li,
+ul,
+button,
+input,
+textarea {
+    font-size: 0.16rem;
+}
+input,
+input:focus,
+textarea,
+textarea:focus {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
+    -webkit-user-modify: read-write-plaintext-only;
+    resize: none;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 0.16rem;
+    color: #9b9b9b;
+}
+
+textarea::-webkit-input-placeholder {
+    font-size: 0.16rem;
+    color: #c2c2c2;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+#app {
+    .flex-box-v();
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    text-align: center;
+}
+.app {
+    &-head,
+    &-content,
+    &-footer {
+        .box-sizing();
+    }
+    // &-head{
+    // }
+    &-content {
+        .flex-box-grow();
+        height: 0;
+        overflow-y: scroll;
+        .overflow-scrolling-touch();
+    }
+    &-footer {
+        height: 44px;
+    }
+}
+.mint-header {
+    height: 44px !important;
+    background-color: @themeColor !important;
+}
+.mint-button {
+    min-width: 0.4rem !important;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    width: 0;
+    clear: both;
+}
+
+// override vux class
+#app {
+    .vux-header {
+        background-color: @themeColor;
+        * {
+            color: white;
+        }
+    }
+    .vux-header-right {
+        .flex-box;
+        .flex-box-v-center;
+    }
+    .vux-header-left {
+        .left-arrow:before {
+            border-color: #fff;
+        }
+    }
+}
+body .weui-toast {
+    top: 45%;
+}

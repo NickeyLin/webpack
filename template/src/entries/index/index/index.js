@@ -13,8 +13,8 @@ Vue.config.productionTip = false;
 {{#fastclick}}
 const FastClick = require("fastclick");
 FastClick.attach(document.body);
-{{/fastclick}}
 
+{{/fastclick}}
 /* eslint-disable no-new */
 new Vue({
     el: "#app",

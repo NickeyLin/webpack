@@ -57,8 +57,11 @@ export default {
     },
     methods: {
         onTitleClick() {
-            /* global topmobi */
-            this.msg = `Welcome to Your Vue.js App! topmobi: ${topmobi.native}`;
+            {{#topmobi}}
+            this.msg = `Welcome to Your Vue.js App! topmobi: ${window.topmobi.native}`;
+            {{else}}
+            this.msg = "Welcome to Your Vue.js App!";
+            {{/topmobi}}
             this.showAlert = true;
         }
     }

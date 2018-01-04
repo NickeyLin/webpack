@@ -2,40 +2,40 @@
 
 module.exports = {
     root: true,
-    parser: 'babel-eslint',
+    parser: "babel-eslint",
     parserOptions: {
-        sourceType: 'module'
+        sourceType: "module"
     },
     env: {
         browser: true,
     },
     {{#if_eq lintConfig "standard"}}
     // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    extends: 'standard',
+    extends: "standard",
     {{/if_eq}}    
     // required to lint *.vue files
     plugins: [
-        'html'
+        "html"
     ],
     // add your custom rules here
-    'rules': {
+    "rules": {
         // 0:off, 1:warn, 2:error
         // use 4 spaces for indentation
         "indent": ["error", 4, { SwitchCase: 1 }],
         // requires semicolons at the end of statements
         "semi": ["error", "always"],
-        // use double quotes 
-        "quotes" : ["error", "double"],
+        // use double quotes
+        "quotes" : ["error", "double", { "avoidEscape": true }],
         "space-before-function-paren": ["error", {
             "anonymous": "always",
             "named": "never",
             "asyncArrow": "always"
         }],        
         // allow paren-less arrow functions
-        'arrow-parens': 0,
+        "arrow-parens": 0,
         // allow async-await
-        'generator-star-spacing': 0,
+        "generator-star-spacing": 0,
         // allow debugger during development
-        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+        "no-debugger": process.env.NODE_ENV === "production" ? 2 : 0
     }
 }

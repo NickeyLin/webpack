@@ -66,13 +66,21 @@ module.exports = {
                 }
             ]
         },
+        vuex: {
+            type: "confirm",
+            message: "Install vuex?"
+        },
+        vux: {
+            type: "confirm",
+            message: "Use vux as your default library?"
+        },
         topmobi: {
             type: "confirm",
-            message: "Require topmobi+ ?"
+            message: "Install topmobi+ ?"
         },
         fastclick: {
             type: "confirm",
-            message: "Require fastclick?"
+            message: "Install fastclick?"
         },
         unit: {
             type: "confirm",
@@ -118,6 +126,7 @@ module.exports = {
         "test/unit/setup.js": "unit && runner === 'jest'",
         "test/e2e/**/*": "e2e",
         "src/router/**/*": "router",
+        "src/store/**/*": "vuex",
         "static/lib/**/*": "topmobi"
     },
     completeMessage:

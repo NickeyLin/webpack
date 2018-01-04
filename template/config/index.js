@@ -3,6 +3,10 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+
+process.env.TARGET = process.env.npm_config_target || "";
+console.log("> Current target -- " + (process.env.TARGET || "ALL"));
+
 var target = process.env.TARGET || "";
 
 module.exports = {

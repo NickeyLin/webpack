@@ -12,5 +12,7 @@ echo ">> npm test"
 npm test
 echo ">> npm run build" 
 npm run build
+echo ">> npm run build --target" 
+npm run build --target=index
 echo ">> npm run dev" 
 npm run dev

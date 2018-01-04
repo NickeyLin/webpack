@@ -11,8 +11,14 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# can specify the target 
+npm run dev --target=index
+
 # build for production with minification
 npm run build
+
+# also can specify the target by --target
+npm run build --target=index
 
 # build for production and view the bundle analyzer report
 npm run build --report

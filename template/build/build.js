@@ -2,9 +2,6 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
-process.env.TARGET = process.argv[2] || '';
-
-console.log("> Current build model -- " + (process.env.TARGET || 'ALL'));
 
 const ora = require('ora')
 const rm = require('rimraf')

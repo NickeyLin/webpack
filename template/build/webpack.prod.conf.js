@@ -59,9 +59,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    {{#if_or unit e2e}}
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
+        ? 'index.html'
+        : {{/if_or}}config.build.index,
       template: 'index.html',
       inject: true,
       minify: {
@@ -74,7 +75,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
-    {{/if_or}}
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
@@ -144,30 +144,3 @@ if (config.build.bundleAnalyzerReport) {
 }
 
 module.exports = webpackConfig
-
-var pages = utils.getEntries([utils.entriesPath + '/**/*.html']);
-
-for (var pathname in pages) {
-  // 配置生成的html文件，定义路径等
-  var conf = {
-    filename: pathname + '.html',
-    template: pages[pathname],   // 模板路径
-    inject: true,              // js插入位置
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true
-      // more options:
-      // https://github.com/kangax/html-minifier#options-quick-reference
-    },
-    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-    chunksSortMode: 'dependency'
-  };
-
-  if (pathname in module.exports.entry) {
-    conf.chunks = ['manifest', 'vendor', pathname];
-    conf.hash = true;
-  }
-
-  module.exports.plugins.push(new HtmlWebpackPlugin(conf));
-}

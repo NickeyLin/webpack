@@ -72,7 +72,7 @@ module.exports = {
     },
     "unit": {
       "type": "confirm",
-      "message": "Set up unit tests"
+      "message": "Setup unit tests"
     },
     "runner": {
       "when": "unit",

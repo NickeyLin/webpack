@@ -27,7 +27,7 @@ module.exports = {
         // use double quotes
         "quotes" : ["error", "double", { "avoidEscape": true }],
         "space-before-function-paren": ["error", {
-            "anonymous": "always",
+            "anonymous": "never",
             "named": "never",
             "asyncArrow": "always"
         }],        

@@ -4,10 +4,12 @@
 
 const path = require('path')
 
+{{#if_eq entry "multi"}}
 process.env.TARGET = process.env.npm_config_target || "";
 console.log("> Current target -- " + (process.env.TARGET || "ALL"));
 
 var target = process.env.TARGET || "";
+{{/if_eq}}
 
 module.exports = {
   dev: {
@@ -54,11 +56,20 @@ module.exports = {
   },
 
   build: {
+    {{#if_eq entry "single"}}
+    // Template for index.html
+    index: path.resolve(__dirname, '../dist/index.html'),
+    
+    // Paths
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    {{/if_eq}}
+    {{#if_eq entry "multi"}}
     // Template for index.html
     index: path.resolve(__dirname, '../dist/', target, 'index.html'),
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist', target),
+    {{/if_eq}}
     assetsSubDirectory: 'static',
     assetsPublicPath: '../',
 

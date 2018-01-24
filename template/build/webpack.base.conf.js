@@ -5,7 +5,12 @@ const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const vuxLoader = require("vux-loader");
 
+{{#if_eq entry "single"}}
+var entries = "./src/main.js"; // 获得入口js文件
+{{/if_eq}}
+{{#if_eq entry "multi"}}
 var entries = utils.getEntries([utils.entriesPath + '/**/*.js']); // 获得入口js文件
+{{/if_eq}}
 
 function resolve (dir) {
     return path.join(__dirname, '..', dir)

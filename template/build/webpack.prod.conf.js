@@ -56,10 +56,27 @@ const webpackConfig = merge(baseWebpackConfig, {
                 ? { safe: true, map: { inline: false } }
                 : { safe: true }
         }),
+        {{#if_eq entry "single"}}
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html
         // see https://github.com/ampedandwired/html-webpack-plugin
-
+        new HtmlWebpackPlugin({
+            filename: process.env.NODE_ENV === 'testing'
+                ? 'index.html'
+                : config.build.index,
+            template: 'index.html',
+            inject: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeAttributeQuotes: true
+                // more options:
+                // https://github.com/kangax/html-minifier#options-quick-reference
+            },
+            // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+            chunksSortMode: 'dependency'
+        }),
+        {{/if_eq}}
         // keep module.id stable when vender modules does not change
         new webpack.HashedModuleIdsPlugin(),
         // enable scope hoisting
@@ -130,6 +147,7 @@ if (config.build.bundleAnalyzerReport) {
 
 module.exports = webpackConfig
 
+{{#if_eq entry "multi"}}
 var pages = utils.getEntries([utils.entriesPath + '/**/*.html']);
 
 for (var pathname in pages) {
@@ -156,3 +174,4 @@ for (var pathname in pages) {
 
     module.exports.plugins.push(new HtmlWebpackPlugin(conf));
 }
+{{/if_eq}}

@@ -41,6 +41,22 @@ module.exports = {
                 }
             ]
         },
+        entry: {
+            type: "list",
+            message : "Single or Multi?",
+            choices: [
+                {
+                    name: "Single entry",
+                    value: "single",
+                    short: "single"
+                },
+                {
+                    name: "Multi entries",
+                    value: "multi",
+                    short: "multi"
+                }
+            ]
+        },
         router: {
             type: "confirm",
             message: "Install vue-router?"
@@ -127,7 +143,11 @@ module.exports = {
         "test/e2e/**/*": "e2e",
         "src/router/**/*": "router",
         "src/store/**/*": "vuex",
-        "static/lib/**/*": "topmobi"
+        "static/lib/**/*": "topmobi",
+        "src/entries/**/*": "entry === 'multi'",
+        "src/main.js": "entry === 'single'",
+        "src/App.vue": "entry === 'single'",
+        "index.html": "entry === 'single'"
     },
     completeMessage:
         "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n  #or\n  npm run dev --target=index\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"

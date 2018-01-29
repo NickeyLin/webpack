@@ -1,49 +1,55 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
-const vuxLoader = require("vux-loader");
+"use strict"
+const path = require("path")
+const utils = require("./utils")
+const config = require("../config")
+const vueLoaderConfig = require("./vue-loader.conf");
+{{#vux}}const vuxLoader = require("vux-loader");{{/vux}}
 
 {{#if_eq entry "single"}}
-var entries = "./src/main.js"; // 获得入口js文件
+{{#typescript}}// 获得入口js文件
+var entries = "./src/main.ts"; {{/typescript}}
+{{#unless typescript}} // 获得入口js文件
+var entries = "./src/main.js";{{/unless}}
 {{/if_eq}}
 {{#if_eq entry "multi"}}
-var entries = utils.getEntries([utils.entriesPath + '/**/*.js']); // 获得入口js文件
+{{#typescript}} // 获得入口js文件
+var entries = utils.getEntries([utils.entriesPath + "/**/*.ts"]);{{/typescript}}
+{{#unless typescript}}// 获得入口js文件
+var entries = utils.getEntries([utils.entriesPath + "/**/*.js"]);{{/unless}}
 {{/if_eq}}
 
 function resolve (dir) {
-    return path.join(__dirname, '..', dir)
+    return path.join(__dirname, "..", dir)
 }
 
 {{#lint}}const createLintingRule = () => ({
     test: /\.(js|vue)$/,
-    loader: 'eslint-loader',
-    enforce: 'pre',
-    include: [resolve('src'), resolve('test')],
+    loader: "eslint-loader",
+    enforce: "pre",
+    include: [resolve("src"), resolve("test")],
     options: {
-      formatter: require('eslint-friendly-formatter'),
+      formatter: require("eslint-friendly-formatter"),
       emitWarning: !config.dev.showEslintErrorsInOverlay
     }
   }){{/lint}}
   
 const webpackConfig = {
-    context: path.resolve(__dirname, '../'),
+    context: path.resolve(__dirname, "../"),
     entry: entries,
     output: {
         path: config.build.assetsRoot,
-        filename: '[name].js',
-        publicPath: process.env.NODE_ENV === 'production'
+        filename: "[name].js",
+        publicPath: process.env.NODE_ENV === "production"
         ? config.build.assetsPublicPath
         : config.dev.assetsPublicPath
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'],
+        extensions: [".js", ".vue", ".json"{{#typescript}}, ".ts"{{/typescript}}],
         alias: {
         {{#if_eq build "standalone"}}
-        'vue$': 'vue/dist/vue.esm.js',
+        "vue$": "vue/dist/vue.esm.js",
         {{/if_eq}}
-        '@': resolve('src'),
+        "@": resolve("src"),
         }
     },
     module: {
@@ -53,58 +59,75 @@ const webpackConfig = {
             {{/lint}}
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                loader: "vue-loader",
                 options: vueLoaderConfig
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+                loader: "babel-loader",
+                include: [resolve("src"), resolve("test"), resolve("node_modules/webpack-dev-server/client")]
+            },
+            {{#typescript}}{
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                enforce: 'pre',
+                loader: 'tslint-loader'
             },
             {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                  appendTsSuffixTo: [/\.vue$/],
+                }
+            },{{/typescript}}
+            {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
+                loader: "url-loader",
                 options: {
                 limit: 10000,
-                name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                name: utils.assetsPath("img/[name].[hash:7].[ext]")
                 }
             },
             {
                 test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-                loader: 'url-loader',
+                loader: "url-loader",
                 options: {
                 limit: 10000,
-                name: utils.assetsPath('media/[name].[hash:7].[ext]')
+                name: utils.assetsPath("media/[name].[hash:7].[ext]")
                 }
             },
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url-loader',
+                loader: "url-loader",
                 options: {
                 limit: 10000,
-                name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+                name: utils.assetsPath("fonts/[name].[hash:7].[ext]")
                 }
-            },
+            }{{#vux}},
             {
                 test: /\.less$/,
                 loader: "style-loader!css-loader!less-loader"
-            }
+            }{{/vux}}
         ]
     },
     node: {
         // prevent webpack from injecting useless setImmediate polyfill because Vue
-        // source contains it (although only uses it if it's native).
+        // source contains it (although only uses it if it"s native).
         setImmediate: false,
         // prevent webpack from injecting mocks to Node native modules
         // that does not make sense for the client
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-        child_process: 'empty'
+        dgram: "empty",
+        fs: "empty",
+        net: "empty",
+        tls: "empty",
+        child_process: "empty"
     }
 }
-
+{{#vux}}
 module.exports = vuxLoader.merge(webpackConfig, {
     plugins: ["vux-ui"]
-});
+});{{/vux}}
+{{#unless vux}}
+module.exports = webpackConfig;
+{{/unless}}

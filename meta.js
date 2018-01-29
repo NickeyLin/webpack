@@ -16,6 +16,12 @@ module.exports = {
             }
 
             return options.inverse(this);
+        },
+        if_no: function(v1, options) {
+            if(!v1) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
         }
     },
     prompts: {
@@ -178,11 +184,12 @@ module.exports = {
         "test/e2e/**/*": "e2e",
         "src/router/**/*": "router",
         "src/store/**/*": "vuex",
-        "static/lib/**/*": "topmobi",
         "src/entries/**/*": "entry === 'multi'",
-        "src/main.js": "entry === 'single'",
+        "src/main.js": "entry === 'single' && !typescript",
+        "src/main.ts": "entry === 'single' && typescript",
         "src/App.vue": "entry === 'single'",
-        "index.html": "entry === 'single'"
+        "index.html": "entry === 'single'",
+        "static/lib/**/*": "topmobi"
     },
     complete: function(data, { chalk }) {
         const green = chalk.green;

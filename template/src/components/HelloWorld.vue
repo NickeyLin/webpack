@@ -40,7 +40,31 @@
         <alert v-model="showAlert" title="恭喜"> \{{ msg }}</alert>
     </div>
 </template>
+{{#typescript}}
+<script lang="ts">
+import { Component, Emit, Inject, Model, Prop, Provide, Vue, Watch } from "vue-property-decorator";
+{{#vux}}import { Alert } from "vux";{{/vux}}
+@Component({
+    components: {
+        Alert
+    }
+})
+export default class HellowWord extends Vue {
+    msg = "Welcome to Your Vue.js App";
+    showAlert = false;
 
+    onTitleClick() {
+        {{#topmobi}}
+            this.msg = `Welcome to Your Vue.js App! topmobi: ${window.topmobi.native}`;
+            {{else}}
+            this.msg = "Welcome to Your Vue.js App!";
+            {{/topmobi}}
+            this.showAlert = true;
+    }
+}
+</script>
+{{/typescript}}
+{{#unless typescript}}
 <script>
 import { Alert } from "vux";
 
@@ -67,7 +91,7 @@ export default {
     }
 };
 </script>
-
+{{/unless}}
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 h1, h2 {

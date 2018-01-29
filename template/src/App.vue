@@ -8,7 +8,23 @@
         {{/router}}
     </div>
 </template>
+{{#typescript}}
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import HelloWorld from "@/components/HelloWorld.vue";
 
+@Component({
+    components: {
+        HelloWorld
+    }
+})
+export default class App extends Vue {
+
+}
+</script>
+{{/typescript}}
+{{#unless typescript}}
 <script>
 {{#unless router}}
 import HelloWorld from "@/components/HelloWorld";
@@ -20,7 +36,7 @@ export default {
     }{{/router}}
 };
 </script>
-
+{{/unless}}
 <style>
 #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;

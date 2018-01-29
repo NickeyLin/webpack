@@ -40,7 +40,7 @@
     {{/router}}
     {{#vux}}
     "vux": "^2.7.4",
-    {{/vux}},
+    {{/vux}}
     "vue": "^2.5.2"
   },
   "devDependencies": {
@@ -49,6 +49,13 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     {{/vux}}
+    {{#typescript}}
+    "ts-loader": "^3.3.1",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-loader": "^3.5.3",
+    "typescript": "^2.6.2",
+    {{/typescript}}
     {{#lint}}
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
@@ -133,7 +140,6 @@
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
-    // "eventsource-polyfill": "^0.9.6",
   },
   "engines": {
     "node": ">= 6.0.0",

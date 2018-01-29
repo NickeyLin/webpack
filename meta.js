@@ -51,6 +51,10 @@ module.exports = {
                 }
             ]
         },
+        typescript: {
+            type: "confirm",
+            message: "Do you want to create a typescript project?"
+        },
         entry: {
             type: "list",
             message: "Single or Multi?",

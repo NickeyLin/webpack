@@ -51,9 +51,6 @@
     {{/vux}}
     {{#typescript}}
     "ts-loader": "^3.3.1",
-    "tslint": "^5.9.1",
-    "tslint-config-standard": "^7.0.0",
-    "tslint-loader": "^3.5.3",
     "typescript": "^2.6.2",
     {{/typescript}}
     {{#lint}}

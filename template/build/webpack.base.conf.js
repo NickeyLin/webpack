@@ -68,12 +68,6 @@ const webpackConfig = {
                 include: [resolve("src"), resolve("test"), resolve("node_modules/webpack-dev-server/client")]
             },
             {{#typescript}}{
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                enforce: 'pre',
-                loader: 'tslint-loader'
-            },
-            {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
                 exclude: /node_modules/,

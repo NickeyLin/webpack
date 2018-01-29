@@ -1,3 +1,13 @@
+const path = require("path");
+const fs = require("fs");
+
+const { sortDependencies, installDependencies, runLintFix, printMessage } = require("./utils");
+const pkg = require("./package.json");
+
+// const templateVersion = pkg.version;
+
+// const { addTestAnswers } = require("./scenarios");
+
 module.exports = {
     helpers: {
         if_or: function(v1, v2, options) {
@@ -43,7 +53,7 @@ module.exports = {
         },
         entry: {
             type: "list",
-            message : "Single or Multi?",
+            message: "Single or Multi?",
             choices: [
                 {
                     name: "Single entry",
@@ -127,6 +137,27 @@ module.exports = {
         e2e: {
             type: "confirm",
             message: "Setup e2e tests with Nightwatch?"
+        },
+        autoInstall: {
+            type: "list",
+            message: "Should we run `npm install` for you after the project has been created? (recommended)",
+            choices: [
+                {
+                    name: "Yes, use NPM",
+                    value: "npm",
+                    short: "npm"
+                },
+                {
+                    name: "Yes, use Yarn",
+                    value: "yarn",
+                    short: "yarn"
+                },
+                {
+                    name: "No, I will handle that myself",
+                    value: false,
+                    short: "no"
+                }
+            ]
         }
     },
     filters: {
@@ -149,6 +180,28 @@ module.exports = {
         "src/App.vue": "entry === 'single'",
         "index.html": "entry === 'single'"
     },
-    completeMessage:
-        "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n  #or\n  npm run dev --target=index\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
+    complete: function(data, { chalk }) {
+        const green = chalk.green;
+
+        sortDependencies(data, green);
+
+        const cwd = path.join(process.cwd(), data.inPlace ? "" : data.destDirName);
+
+        if (data.autoInstall) {
+            installDependencies(cwd, data.autoInstall, green)
+                .then(() => {
+                    return runLintFix(cwd, data, green);
+                })
+                .then(() => {
+                    printMessage(data, green);
+                })
+                .catch(e => {
+                    console.log(chalk.red("Error:"), e);
+                });
+        } else {
+            printMessage(data, chalk);
+        }
+    }
+    // completeMessage:
+    //     "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n  #or\n  npm run dev --target=index\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };

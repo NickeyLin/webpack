@@ -9,6 +9,7 @@ exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
+
   return path.posix.join(assetsSubDirectory, _path)
 }
 
@@ -22,7 +23,7 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  var postcssLoader = {
+  const postcssLoader = {
     loader: 'postcss-loader',
     options: {
       sourceMap: options.sourceMap
@@ -32,6 +33,7 @@ exports.cssLoaders = function (options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -69,6 +71,7 @@ exports.cssLoaders = function (options) {
 exports.styleLoaders = function (options) {
   const output = []
   const loaders = exports.cssLoaders(options)
+
   for (const extension in loaders) {
     const loader = loaders[extension]
     output.push({
@@ -76,19 +79,19 @@ exports.styleLoaders = function (options) {
       use: loader
     })
   }
+
   return output
 }
 
-exports.createNotifierCallback = function () {
+exports.createNotifierCallback = () => {
   const notifier = require('node-notifier')
 
   return (severity, errors) => {
-    if (severity !== 'error') {
-      return
-    }
-    const error = errors[0]
+    if (severity !== 'error') return
 
+    const error = errors[0]
     const filename = error.file && error.file.split('!').pop()
+    
     notifier.notify({
       title: pkg.name,
       message: severity + ': ' + error.name,

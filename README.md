@@ -25,15 +25,15 @@ $ npm run dev
 ```
 ## Configurable options
 
-* [x]Single entry/Multi entries
-* [x]vue-router
-* [x]ESLint standard/none
-* [x]vuex
-* [x]vux
-* [x]fastclick
-* [x]Unit tests
-* [x]e2e tests with Nightwatch
-* []TypeScript
+* [x] Single entry/Multi entries
+* [x] vue-router
+* [x] ESLint standard/none
+* [x] vuex
+* [x] vux
+* [x] fastclick
+* [x] Unit tests
+* [x] e2e tests with Nightwatch
+* [ ] TypeScript
 
 ## What's Included
 

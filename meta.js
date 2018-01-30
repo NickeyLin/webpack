@@ -185,6 +185,7 @@ module.exports = {
         "src/router/**/*": "router",
         "src/store/**/*": "vuex",
         "src/entries/**/*": "entry === 'multi'",
+        "src/less/**/*": "vux",
         "src/main.js": "entry === 'single' && !typescript",
         "src/main.ts": "entry === 'single' && typescript",
         "src/App.vue": "entry === 'single'",

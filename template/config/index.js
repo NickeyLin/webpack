@@ -3,12 +3,11 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
 {{#if_eq entry "multi"}}
-process.env.TARGET = process.env.npm_config_target || "";
-console.log("> Current target -- " + (process.env.TARGET || "ALL"));
+const chalk = require("chalk");
 
-var target = process.env.TARGET || "";
+var target = process.env.npm_config_target || "";
+console.log(`> Current Target -- ${chalk.magenta(target || "All")}`)
 {{/if_eq}}
 
 module.exports = {
@@ -71,13 +70,13 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist', target),
     {{/if_eq}}
     assetsSubDirectory: 'static',
-    assetsPublicPath: '../',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

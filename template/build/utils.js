@@ -2,6 +2,7 @@
 const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 const pkg = require('../package.json')
 var glob = require('glob')
 
@@ -101,29 +102,50 @@ exports.createNotifierCallback = () => {
   }
 }
 
-exports.entriesPath = './src/entries';
+const entriesPath = "./src/entries"
+exports.entriesPath = entriesPath;
 
-exports.getEntries = function (globPath) {
-  var entries = {},
-    basename, tmp, pathname;
-  if (typeof (globPath) != "object") {
-    globPath = [globPath]
+function getEntries(ext = ".js") {
+  let basename, tmp, pathname;
+  let globPath;
+  const target = process.env.npm_config_target;
+  if (target) {
+    globPath = [`${entriesPath}/${target}`];
+  } else {
+    globPath = glob.sync(`${entriesPath}/*`);
   }
-  globPath.forEach((itemPath) => {
-    glob.sync(itemPath).forEach(function (entry) {
-      if (!!process.env.TARGET && entry.indexOf(process.env.TARGET) < 0) {
-        return;
-      }
-      console.log("> For Each Entries : " + entry);
-      basename = path.basename(entry, path.extname(entry));
-      if (entry.split('/').length > 4) {
-        tmp = entry.split('/').splice(-3);
-        pathname = tmp.splice(0, 1) + '/' + basename; // 正确输出js和html的路径
-        entries[pathname] = entry;
-      } else {
-        entries[basename] = entry;
-      }
-    });
+  let result = {};
+  globPath.forEach(path => {
+    const target = path.replace(entriesPath + "/", "");
+    let entries = glob.sync(`${path}/*${ext}`);
+
+    if (entries.length > 0) {
+      result[target] = entries[0];
+    }
   });
-  return entries;
-}
+  return result;
+};
+exports.getEntries = getEntries;
+
+exports.htmlWebpackPlugins = function(entry) {
+  var entries = getEntries(".html");
+  let result = [];
+  for (const target in entries) {
+    let conf = {
+      filename: `index.html`,
+      template: entries[target], // 模板路径
+      inject: true, // js插入位置
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: "dependency"
+    };
+    result.push(new HtmlWebpackPlugin(conf));
+  }
+  return result;
+};

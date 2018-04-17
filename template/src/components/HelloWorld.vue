@@ -37,13 +37,14 @@
                 <a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a>
             </li>
         </ul>
+{{#vux}}
         <alert v-model="showAlert" title="恭喜"> \{{ msg }}</alert>
+{{/vux}}
     </div>
 </template>
 
 <script>
-import { Alert } from "vux";
-
+{{#vux}}import { Alert } from "vux";{{/vux}}
 export default {
   name: "HelloWorld",
   data() {
@@ -52,9 +53,11 @@ export default {
       showAlert: false
     };
   },
+  {{#vux}}
   components: {
     Alert
   },
+  {{/vux}}
   methods: {
     onTitleClick() {
       {{#topmobi}}

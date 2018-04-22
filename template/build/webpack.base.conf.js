@@ -3,9 +3,9 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
-{{#if vux}}
+{{#if_eq uilib vux}}
 const vuxLoader = require("vux-loader");
-{{/if}}
+{{/if_eq}}
 
 {{#if_eq entry "single"}}
 var entries = "./src/main.js"; // 获得入口js文件
@@ -106,10 +106,10 @@ const webpackConfig = {
     child_process: 'empty'
   }
 }
-{{#vux}}
+{{#if_eq uilib vux}}
 module.exports = vuxLoader.merge(webpackConfig, {
   plugins: ["vux-ui"]
 });
 {{else}}
 module.exports = webpackConfig;
-{{/vux}}
+{{/if_eq}}

@@ -30,8 +30,8 @@
     {{/fastclick}}
     "vue": "^2.5.2",
     {{#vuex}}"vuex": "^3.0.1"{{/vuex}}{{#router}},
-    "vue-router": "^3.0.1"{{/router}}{{#vux}},
-    "vux": "^2.7.4"{{/vux}}
+    "vue-router": "^3.0.1"{{/router}}{{#if_eq uilib vux}},
+    "vux": "^2.7.4"{{/if_eq}}
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -49,9 +49,9 @@
     "css-loader": "^0.28.0",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    {{#vux}}
+    {{#if_eq uilib vux}}
     "vux-loader": "^1.1.27",
-    {{/vux}}
+    {{/if_eq}}
     {{#lint}}
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",

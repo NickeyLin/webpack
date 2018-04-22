@@ -29,7 +29,11 @@ $ npm run dev
 * [x] vue-router
 * [x] ESLint standard/none
 * [x] vuex
-* [x] vux
+* [x] UI Library integrate
+    * [x] vux
+    * [x] mint-ui
+    * [x] element-ui
+* [x] topmobi
 * [x] fastclick
 * [x] Unit tests
 * [x] e2e tests with Nightwatch

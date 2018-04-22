@@ -96,16 +96,58 @@ module.exports = {
       type: "confirm",
       message: "Install vuex?"
     },
-    vux: {
-      type: "confirm",
-      message: "Use vux as your default library?"
+    uilib: {
+      type: "list",
+      message:
+        "Pick a library you want to integrate, so that the configuration of the library can be set automatic. ",
+      choices: [
+        {
+          name: "vux (Recommend for Mobile)",
+          value: "vux",
+          short: "vux"
+        },
+        {
+          name: "mint",
+          value: "mint",
+          short: "mint"
+        },
+        {
+          name: "element (Recommend for PC)",
+          value: "element",
+          short: "element"
+        },
+        {
+          name: "none (Not required, or integrate your self)",
+          value: "none",
+          short: "none"
+        }
+      ]
+    },
+    elementImport: {
+      type: "list",
+      when: "uilib == 'element'",
+      message: "Do you want import Element entirely, or just import what you need?",
+      choices: [
+        {
+          name: "Fully import",
+          value: "fully",
+          short: "fully"
+        },
+        {
+          name: "On demand",
+          value: "demand",
+          short: "demand"
+        }
+      ]
     },
     topmobi: {
       type: "confirm",
+      when: "uilib == 'vux' || uilib == 'mint'",
       message: "Install topmobi+ ?"
     },
     fastclick: {
       type: "confirm",
+      when: "uilib == 'vux' || uilib == 'mint'",
       message: "Install fastclick?"
     },
     unit: {

@@ -16,6 +16,12 @@ module.exports = {
       }
 
       return options.inverse(this);
+    },
+    if_eq_or: function(a, b, c, opts) {
+      if (a == b || a == c) {
+        return opts.fn(this);
+      }
+      return opts.inverse(this);
     }
   },
   prompts: {
@@ -217,7 +223,7 @@ module.exports = {
     "test/e2e/**/*": "e2e",
     "src/router/**/*": "router",
     "src/store/**/*": "vuex",
-    "static/lib/**/*": "topmobi",
+    "static/lib/**/*": "typeof(topmobi) != 'undefined' && topmobi",
     "src/entries/**/*": "entry === 'multi'",
     "src/main.js": "entry === 'single'",
     "src/App.vue": "entry === 'single'",

@@ -28,16 +28,32 @@
     {{#fastclick}}
     "fastclick": "^1.0.6",
     {{/fastclick}}
+    {{#topmobi}}
+    "topmobi": "git+https://git.changhong.io/topmobi/topmobi.git",
+    {{/topmobi}}
     "vue": "^2.5.2",
     {{#vuex}}"vuex": "^3.0.1"{{/vuex}}{{#router}},
-    "vue-router": "^3.0.1"{{/router}}{{#if_eq uilib vux}},
-    "vux": "^2.7.4"{{/if_eq}}
+    "vue-router": "^3.0.1"{{/router}}{{#if_eq uilib "vux"}},
+    "vux": "^2.7.4"{{/if_eq}}{{#if_eq uilib "mint"}},
+    "mint-ui":"^2.2.13"{{/if_eq}}{{#if_eq uilib "element"}},
+    "element-ui":"^2.3.6"{{/if_eq}}
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
+    {{#if_eq uilib "mint"}}
+    "babel-plugin-component": "^1.1.0",
+    {{/if_eq}}
+    {{#if_eq uilib "element"}}
+    {{#if_eq elementImport "demand"}}
+    "babel-plugin-component": "^1.1.0",
+    {{/if_eq}}
+    {{/if_eq}}
+    {{#topmobi}}
+    "babel-plugin-import": "^1.7.0",
+    {{/topmobi}}
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-plugin-transform-vue-jsx": "^3.5.0",
@@ -49,7 +65,7 @@
     "css-loader": "^0.28.0",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    {{#if_eq uilib vux}}
+    {{#if_eq uilib "vux"}}
     "vux-loader": "^1.1.27",
     {{/if_eq}}
     {{#lint}}

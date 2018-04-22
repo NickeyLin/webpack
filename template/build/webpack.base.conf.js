@@ -3,7 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
-{{#if_eq uilib vux}}
+{{#if_eq uilib "vux"}}
 const vuxLoader = require("vux-loader");
 {{/if_eq}}
 
@@ -106,7 +106,7 @@ const webpackConfig = {
     child_process: 'empty'
   }
 }
-{{#if_eq uilib vux}}
+{{#if_eq uilib "vux"}}
 module.exports = vuxLoader.merge(webpackConfig, {
   plugins: ["vux-ui"]
 });

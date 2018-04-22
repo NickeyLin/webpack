@@ -5,7 +5,31 @@
     }],
     "stage-2"
   ],
-  "plugins": ["transform-vue-jsx", "transform-runtime"]{{#if_or unit e2e}},
+  "plugins": [
+    "transform-vue-jsx", 
+    "transform-runtime"{{#if_eq uilib "mint"}}, 
+    [
+      "component", 
+      [
+        {
+          "libraryName": "mint-ui",
+          "style": true
+        }
+      ]
+    ]{{/if_eq}}{{#if_eq uilib "element"}}{{#if_eq elementImport "demand"}}, 
+    [
+      "component", 
+      [
+        {
+          "libraryName": "element-ui",
+          "styleLibraryName": "theme-chalk"
+        }
+      ]
+    ]{{/if_eq}}{{/if_eq}}{{#topmobi}},
+    ["import", {
+      "libraryName": "topmobi"
+    }]{{/topmobi}}
+  ]{{#if_or unit e2e}},
   "env": {
     "test": {
       "presets": ["env", "stage-2"]{{#if_eq runner "karma"}},

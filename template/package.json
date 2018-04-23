@@ -63,11 +63,15 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    {{#if_eq uilib "vux"}}
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
-    {{#if_eq uilib "vux"}}
     "vux-loader": "^1.1.27",
     {{/if_eq}}
+    {{#if_eq_or uilib "mint" "element"}}
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    {{/if_eq_or}}
     {{#lint}}
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
@@ -148,7 +152,12 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
+    {{#if_eq_or uilib "vux" "mint"}}
+    "Android >= 4.4",
+    "iOS >= 8",
+    {{else}}
+    "last 4 versions",
+    {{/if_eq_or}}
     "not ie <= 8"
   ]
 }

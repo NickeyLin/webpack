@@ -67,6 +67,18 @@ module.exports = new Promise((resolve, reject) => {
       process.env.PORT = port
       // add port to devServer config
       devWebpackConfig.devServer.port = port
+      {{#if_eq entry "single"}}
+      // Add FriendlyErrorsPlugin
+      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+        },
+        onErrors: config.dev.notifyOnErrors
+          ? utils.createNotifierCallback()
+          : undefined
+      }))
+      {{/if_eq}}
+      {{#if_eq entry "multi"}}
       // current target
       let target = process.env.TARGET || 'index';
 
@@ -79,7 +91,6 @@ module.exports = new Promise((resolve, reject) => {
           ? utils.createNotifierCallback()
           : undefined
       }))
-      {{#if_eq entry "multi"}}
       // 配置多个入口的HtmlWebpackPlugin
       var pages = utils.getEntries(".html");
 

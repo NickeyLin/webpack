@@ -30,9 +30,9 @@ $ npm run dev
 * [x] ESLint standard/none
 * [x] vuex
 * [x] UI Library integrate
-    * [x] vux
-    * [x] mint-ui
-    * [x] element-ui
+    * [x] vux(mobile)
+    * [x] mint-ui(mobile)
+    * [x] element-ui(pc)
 * [x] topmobi
 * [x] fastclick
 * [x] Unit tests

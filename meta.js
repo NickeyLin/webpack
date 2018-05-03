@@ -227,7 +227,8 @@ module.exports = {
     "src/entries/**/*": "entry === 'multi'",
     "src/main.js": "entry === 'single'",
     "src/App.vue": "entry === 'single'",
-    "index.html": "entry === 'single'"
+    "index.html": "entry === 'single'",
+    "src/styles/*.less": "vux",
   },
   complete: function(data, { chalk }) {
     const green = chalk.green;

@@ -228,7 +228,7 @@ module.exports = {
     "src/main.js": "entry === 'single'",
     "src/App.vue": "entry === 'single'",
     "index.html": "entry === 'single'",
-    "src/styles/*.less": "vux",
+    "src/styles/*.less": "uilib === 'vux'",
   },
   complete: function(data, { chalk }) {
     const green = chalk.green;

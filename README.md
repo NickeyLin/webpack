@@ -31,7 +31,6 @@ $ npm run dev
 * [x] vuex
 * [x] UI Library integrate
     * [x] vux(mobile)
-    * [x] mint-ui(mobile)
     * [x] element-ui(pc)
 * [ ] axios
 * [x] topmobi

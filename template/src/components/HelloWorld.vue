@@ -44,21 +44,19 @@
 </template>
 
 <script>
-{{#if_eq uilib "vux"}}
-import { Alert } from "vux";
+{{#if_eq uilib 'vux'}}
+import { Alert } from 'vux';
 {{/if_eq}}
-{{#if_eq uilib "mint"}}
-import { MessageBox } from "mint-ui";
-{{/if_eq}}
+
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      msg: 'Welcome to Your Vue.js App',
       showAlert: false
     };
   },
-  {{#if_eq uilib "vux"}}
+  {{#if_eq uilib 'vux'}}
   components: {
     Alert
   },
@@ -68,13 +66,10 @@ export default {
       {{#topmobi}}
       this.msg = `Welcome to Your Vue.js App! topmobi: ${this.$topmobi}`;
       {{else}}
-      this.msg = "Welcome to Your Vue.js App!";
+      this.msg = 'Welcome to Your Vue.js App!';
       {{/topmobi}}
-      {{#if_eq uilib "mint"}}
-      MessageBox.alert(this.msg, "恭喜");
-      {{/if_eq}}
-      {{#if_eq uilib "element"}}
-      this.$alert(this.msg, "恭喜");
+      {{#if_eq uilib 'element'}}
+      this.$alert(this.msg, '恭喜');
       {{/if_eq}}
       this.showAlert = true;
     }

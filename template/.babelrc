@@ -7,16 +7,7 @@
   ],
   "plugins": [
     "transform-vue-jsx", 
-    "transform-runtime"{{#if_eq uilib "mint"}}, 
-    [
-      "component", 
-      [
-        {
-          "libraryName": "mint-ui",
-          "style": true
-        }
-      ]
-    ]{{/if_eq}}{{#if_eq uilib "element"}}{{#if_eq elementImport "demand"}}, 
+    "transform-runtime"{{#if_eq uilib "element"}}{{#if_eq elementImport "demand"}}, 
     [
       "component", 
       [

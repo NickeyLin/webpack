@@ -32,13 +32,11 @@ module.exports = {
     // 0:off, 1:warn, 2:error
     // requires semicolons at the end of statements
     "semi": ["error", "always"],
-    // use double quotes
-    "quotes" : ["error", "double", { "avoidEscape": true }],
     "space-before-function-paren": ["error", {
         "anonymous": "never",
         "named": "never",
         "asyncArrow": "always"
-    }],        
+    }],
     // allow paren-less arrow functions
     "arrow-parens": 0,
     // allow async-await

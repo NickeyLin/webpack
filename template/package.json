@@ -37,8 +37,7 @@
     "vue": "^2.5.2",
     {{#vuex}}"vuex": "^3.0.1"{{/vuex}}{{#router}},
     "vue-router": "^3.0.1"{{/router}}{{#if_eq uilib "vux"}},
-    "vux": "^2.7.4"{{/if_eq}}{{#if_eq uilib "mint"}},
-    "mint-ui":"^2.2.13"{{/if_eq}}{{#if_eq uilib "element"}},
+    "vux": "^2.7.4"{{/if_eq}}{{#if_eq uilib "element"}},
     "element-ui":"^2.3.6"{{/if_eq}}
   },
   "devDependencies": {
@@ -46,9 +45,6 @@
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
-    {{#if_eq uilib "mint"}}
-    "babel-plugin-component": "^1.1.0",
-    {{/if_eq}}
     {{#if_eq uilib "element"}}
     {{#if_eq elementImport "demand"}}
     "babel-plugin-component": "^1.1.0",
@@ -71,10 +67,10 @@
     "less-loader": "^4.0.5",
     "vux-loader": "^1.1.27",
     {{/if_eq}}
-    {{#if_eq_or uilib "mint" "element"}}
+    {{#if_eq uilib "element"}}
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
-    {{/if_eq_or}}
+    {{/if_eq}}
     {{#lint}}
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
@@ -155,12 +151,12 @@
   },
   "browserslist": [
     "> 1%",
-    {{#if_eq_or uilib "vux" "mint"}}
+    {{#if_eq uilib "vux"}}
     "Android >= 4.4",
     "iOS >= 8",
     {{else}}
     "last 4 versions",
-    {{/if_eq_or}}
+    {{/if_eq}}
     "not ie <= 8"
   ]
 }

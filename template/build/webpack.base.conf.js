@@ -28,7 +28,7 @@ function resolve (dir) {
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 }){{/lint}}
-  
+
 const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: entries,

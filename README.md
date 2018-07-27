@@ -33,6 +33,7 @@ $ npm run dev
     * [x] vux(mobile)
     * [x] mint-ui(mobile)
     * [x] element-ui(pc)
+* [ ] axios
 * [x] topmobi
 * [x] fastclick
 * [x] Unit tests

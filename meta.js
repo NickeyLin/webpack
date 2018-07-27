@@ -156,6 +156,10 @@ module.exports = {
       when: "uilib == 'vux' || uilib == 'mint'",
       message: "Install fastclick?"
     },
+    axios: {
+      type: "confirm",
+      message: "Use axios for ajax"
+    },
     unit: {
       type: "confirm",
       message: "Set up unit tests"
@@ -229,6 +233,7 @@ module.exports = {
     "src/App.vue": "entry === 'single'",
     "index.html": "entry === 'single'",
     "src/styles/*.less": "uilib === 'vux'",
+    "src/utils/http.js": "axios"
   },
   complete: function(data, { chalk }) {
     const green = chalk.green;

@@ -25,7 +25,10 @@ Vue.prototype.$alert = MessageBox.alert;
 import { TopmobiPlugin } from "topmobi";
 Vue.use(TopmobiPlugin);
 {{/topmobi}}
-
+{{#axios}}
+import http from "./utils/http";
+Vue.prototype.$http = http;
+{{/axios}}
 Vue.config.productionTip = false;
 
 {{#fastclick}}

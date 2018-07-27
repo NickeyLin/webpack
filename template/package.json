@@ -25,6 +25,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    {{#axios}}
+    "axios": "^0.18.0",
+    {{/axios}}
     {{#fastclick}}
     "fastclick": "^1.0.6",
     {{/fastclick}}
